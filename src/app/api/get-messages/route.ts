@@ -7,7 +7,7 @@ import UserModel from "@/models/User.model";
 import mongoose from "mongoose";
 
 
-export async function GET(){
+export async function GET(request: Request){
     await DBConnect();
 
     const session = await getServerSession(authOptions);

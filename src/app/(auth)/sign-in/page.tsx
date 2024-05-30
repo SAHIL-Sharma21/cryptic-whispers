@@ -6,8 +6,8 @@ import * as z  from "zod"
 import Link from "next/link"
 import { useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
-import { useRouter } from "next/navigation"
-
+// import Router from 'next/router'
+import {useRouter} from 'next/navigation'
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage} from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -21,6 +21,7 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {toast} = useToast();
   const router = useRouter();
+
 
   //Zod implementation --> same we will do in other projects also 
   const form = useForm<z.infer<typeof signInSchame>>({
@@ -59,13 +60,13 @@ const SignIn = () => {
       }
     } 
 
+    console.log(result?.url);
     
     //checking for url and then redirecting 
     if(result?.url){
+      router.push('/dashboard');
       console.log("login successful");
-      router.replace('/dashboard');
     }
-
     setIsLoading(false);    
   }
 

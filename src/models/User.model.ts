@@ -28,11 +28,11 @@ export interface User extends Document {
     username: string;
     email: string;
     password: string;
-    verifyCode: string,
-    verifyCodeExpiry: Date,
-    isVerified: boolean,
-    isAcceptingMessage: boolean,
-    messages: Message[],//message ka type upr define hai ussi se hoga.
+    verifyCode: string;
+    verifyCodeExpiry: Date; 
+    isVerified: boolean;
+    isAcceptingMessages: boolean;
+    messages: Message[];//message ka type upr define hai ussi se hoga.
 }
 
 const UserSchema: Schema<User> = new Schema({
@@ -64,7 +64,7 @@ const UserSchema: Schema<User> = new Schema({
         type: Boolean,
         default: false,
     },
-    isAcceptingMessage: {
+    isAcceptingMessages: {
         type: Boolean,
         default: true,
     }, 

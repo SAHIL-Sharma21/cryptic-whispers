@@ -43,6 +43,8 @@ const SignIn = () => {
       password: data.password
     });
     
+    console.log('SignIn result:', result);
+
     //checking for error
     if(result?.error){
       if(result.error === 'CredentialsSignin'){
@@ -60,11 +62,9 @@ const SignIn = () => {
       }
     } 
 
-    console.log(result);
-    
     //checking for url and then redirecting 
     if(result?.url){
-      router.replace('/');
+      router.replace('/dashboard');
     }
     setIsLoading(false);    
   }

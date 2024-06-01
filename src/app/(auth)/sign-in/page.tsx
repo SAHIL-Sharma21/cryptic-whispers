@@ -60,12 +60,11 @@ const SignIn = () => {
       }
     } 
 
-    console.log(result?.url);
+    console.log(result);
     
     //checking for url and then redirecting 
     if(result?.url){
-      router.push('/dashboard');
-      console.log("login successful");
+      router.replace('/');
     }
     setIsLoading(false);    
   }

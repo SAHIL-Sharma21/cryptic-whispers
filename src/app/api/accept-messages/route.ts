@@ -28,12 +28,12 @@ export async function POST(request: Request){
     const userId = user._id
 
     //forntend pass the acceptMessage flag in the request
-    const {acceptMessages} = await request.json();
+    const {acceptMessage} = await request.json();
 
     try {
        //findign user and updating him
       const updatedUser = await UserModel.findByIdAndUpdate(userId, {
-        isAcceptingMessage: acceptMessages
+        isAcceptingMessage: acceptMessage
        }, {new: true}); // new property dene se hme updated user model milega.
 
        if(!updatedUser){

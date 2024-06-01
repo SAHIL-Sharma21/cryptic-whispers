@@ -8,12 +8,13 @@ import Link from 'next/link';
 import { Button } from './ui/button';
 
 
+
+
 const Navbar = () => {
 
     const {data: session} = useSession();
     const user: User = session?.user as User ; //this comes from documentation --> as asserstion
-
-
+   
   return (
     <>
         <nav className='p-4 md:p-6 shadow-md bg-gray-900 text-white'>

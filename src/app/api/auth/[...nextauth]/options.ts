@@ -5,6 +5,7 @@ import UserModel from '@/models/User.model'
 import DBConnect from '@/lib/dbConnect'
 import bcrypt from 'bcryptjs'
 
+
 export const authOptions: NextAuthOptions = {
     providers: [
         CrendentialsProvider({
@@ -39,7 +40,7 @@ export const authOptions: NextAuthOptions = {
                     //if user is found then we will check password
                     const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
 
-                    if(isPasswordCorrect){
+                    if(isPasswordCorrect){                        
                         return user
                     } else {
                         throw new Error("password is incorrect");
@@ -52,34 +53,33 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async session({ session, token }) {
-
-            //modifying session as nextauth provide session based authentication
-            if(token){
-                session.user._id = token._id;
-                session.user.isVerified = token.isVerified;
-                session.user.isAcceptingMessage = token.isAcceptingMessage;
-                session.user.username = token.username;
-            }
-
-            return session
-          },
-          async jwt({ token, user}) {
+        async jwt({ token, user}) {
             //user se data nikal kr token mei insert kr rahe hai making token powerful ki jb chahe hm information nikal le
             if(user){
                 token._id = user._id?.toString();//modifying the USer types which was provided by the next-auth then it will not give error
                 token.isVerified = user.isVerified;
                 token.isAcceptingMessages= user.isAcceptingMessage;
                 token.username = user.username;
-            }
+            }      
             return token //very important to retun token if not then bug will be faced
+          },
+
+        async session({ session, token }) {
+            //modifying session as nextauth provide session based authentication
+            if(token){
+                session.user._id = token._id;
+                session.user.isVerified = token.isVerified;
+                session.user.isAcceptingMessage = token.isAcceptingMessages as boolean;
+                session.user.username = token.username;
+            }  
+            return session
           }
     },
     pages: {
         signIn: '/sign-in'//nextauth automatically signin page design kr lega hmne khuch nhi krna padega.
     },
+    secret: process.env.NEXT_AUTH_SECRET,// secret key is important
     session: {
         strategy: "jwt"//defining session with thi jwt strategy
     },
-    secret: process.env.NEXT_AUTH_SECRET,// secret key is important
 } 

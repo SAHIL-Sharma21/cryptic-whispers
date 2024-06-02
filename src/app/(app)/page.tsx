@@ -29,7 +29,7 @@ export default function Home() {
           <p className="mt-3 md:mt-4 text-base md:text-lg">
             Cryptic Whispers - Where your identity remains a secret.
           </p>
-          <Button><Link href={"/dashboard"}>DashBoard</Link></Button>
+          <Button className='mt-3 md:mt-4'><Link href={"/dashboard"}>DashBoard</Link></Button>
         </section>
 
         {/* Carousel for Messages */}
@@ -62,7 +62,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="text-center p-4 md:p-6 bg-gray-900 text-white">
-        © 2024 True Feedback. All rights reserved.
+        © 2024 Cryptic Whispers. All rights reserved.
       </footer>
     </div>
       
